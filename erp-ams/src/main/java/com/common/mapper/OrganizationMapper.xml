@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.dao.OrganizationMapper">
+	<resultMap id="BaseResultMap" type="com.common.entity.Organization">
+		<id column="w_organization_id" jdbcType="INTEGER" property="wOrganizationId" />
+		<result column="w_organization_father_id" jdbcType="INTEGER"
+			property="wOrganizationFatherId" />
+		<result column="w_organization_name" jdbcType="VARCHAR"
+			property="wOrganizationName" />
+		<result column="w_organization_createdate" jdbcType="TIMESTAMP"
+			property="wOrganizationCreatedate" />
+	</resultMap>
+	<resultMap extends="BaseResultMap" id="ResultMapWithBLOBs"
+		type="com.common.entity.Organization">
+		<result column="w_organization_description" jdbcType="LONGVARCHAR"
+			property="wOrganizationDescription" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		w_organization_id, w_organization_father_id, w_organization_name,
+		w_organization_createdate
+	</sql>
+	<sql id="Blob_Column_List">
+		w_organization_description
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="ResultMapWithBLOBs">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from w_organization
+		where w_organization_id = #{wOrganizationId,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from w_organization
+		where w_organization_id = #{wOrganizationId,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.common.entity.Organization">
+		insert into w_organization (w_organization_id, w_organization_father_id,
+		w_organization_name, w_organization_createdate,
+		w_organization_description)
+		values (#{wOrganizationId,jdbcType=INTEGER},
+		#{wOrganizationFatherId,jdbcType=INTEGER},
+		#{wOrganizationName,jdbcType=VARCHAR},
+		#{wOrganizationCreatedate,jdbcType=TIMESTAMP},
+		#{wOrganizationDescription,jdbcType=LONGVARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.common.entity.Organization">
+		insert into w_organization
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="wOrganizationId != null">
+				w_organization_id,
+			</if>
+			<if test="wOrganizationFatherId != null">
+				w_organization_father_id,
+			</if>
+			<if test="wOrganizationName != null">
+				w_organization_name,
+			</if>
+			<if test="wOrganizationCreatedate != null">
+				w_organization_createdate,
+			</if>
+			<if test="wOrganizationDescription != null">
+				w_organization_description,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="wOrganizationId != null">
+				#{wOrganizationId,jdbcType=INTEGER},
+			</if>
+			<if test="wOrganizationFatherId != null">
+				#{wOrganizationFatherId,jdbcType=INTEGER},
+			</if>
+			<if test="wOrganizationName != null">
+				#{wOrganizationName,jdbcType=VARCHAR},
+			</if>
+			<if test="wOrganizationCreatedate != null">
+				#{wOrganizationCreatedate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="wOrganizationDescription != null">
+				#{wOrganizationDescription,jdbcType=LONGVARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.common.entity.Organization">
+		update w_organization
+		<set>
+			<if test="wOrganizationFatherId != null">
+				w_organization_father_id = #{wOrganizationFatherId,jdbcType=INTEGER},
+			</if>
+			<if test="wOrganizationName != null">
+				w_organization_name = #{wOrganizationName,jdbcType=VARCHAR},
+			</if>
+			<if test="wOrganizationCreatedate != null">
+				w_organization_createdate = #{wOrganizationCreatedate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="wOrganizationDescription != null">
+				w_organization_description = #{wOrganizationDescription,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where w_organization_id = #{wOrganizationId,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKeyWithBLOBs" parameterType="com.common.entity.Organization">
+		update w_organization
+		set w_organization_father_id = #{wOrganizationFatherId,jdbcType=INTEGER},
+		w_organization_name = #{wOrganizationName,jdbcType=VARCHAR},
+		w_organization_createdate =
+		#{wOrganizationCreatedate,jdbcType=TIMESTAMP},
+		w_organization_description =
+		#{wOrganizationDescription,jdbcType=LONGVARCHAR}
+		where w_organization_id = #{wOrganizationId,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.common.entity.Organization">
+		update w_organization
+		set w_organization_father_id = #{wOrganizationFatherId,jdbcType=INTEGER},
+		w_organization_name = #{wOrganizationName,jdbcType=VARCHAR},
+		w_organization_createdate =
+		#{wOrganizationCreatedate,jdbcType=TIMESTAMP}
+		where w_organization_id = #{wOrganizationId,jdbcType=INTEGER}
+	</update>
+</mapper>

@@ -1,0 +1,43 @@
+/**
+左侧导航栏顶端图标
+**/
+.layui-side .layui-side-scroll .kit-side-fold {
+    height: 35px;
+    background-color: #4A5064;
+    color: #aeb9c2;
+    line-height: 35px;
+    text-align: center;
+    cursor: pointer;
+}
+/**
+屏蔽第一个选项卡的删除功能
+**/
+.layui-tab-title li:first-child>i {
+	display:none
+}
+/**
+定义选项卡的样式
+**/
+.layui-tab-title{
+	border-bottom: 1px solid #1AA094;
+}
+.layui-tab-title span{
+	font-style: normal;
+	padding-left: 5px;
+}
+.layui-tab-title .layui-this{
+	color: white;
+    background-color: #1AA094;
+}
+.layui-tab-title .layui-this:after{
+	border-bottom: 0;
+}
+/**
+左侧导航栏收缩样式
+**/
+.kit-layout-admin .kit-body-folded,.kit-layout-admin .kit-footer-folded {
+	left:50px
+}
+.kit-layout-admin .my-side {
+	width:50px
+}

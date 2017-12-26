@@ -1,0 +1,112 @@
+html, body {
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+	margin: 0;
+	padding: 0;
+	background-color: rgba(53, 51, 51, 0.5);
+}
+
+html, body:before {
+	background: url(../images/login.jpg);
+	background-size: 100% 100%;
+	-moz-background-size: 100% 100%;
+	-webkit-background-size: 100% 100%;
+}
+
+.beg-login-box {
+	width: 550px;
+	height: 500px;
+	margin: 10% auto;
+	background-color: rgba(255, 255, 255, 0.407843);
+	border-radius: 10px;
+	color: aliceblue;
+}
+
+.beg-login-box header {
+	height: 39px;
+	padding: 10px;
+	border-bottom: 1px solid aliceblue;
+}
+
+.beg-login-box header h1 {
+	text-align: center;
+	font-size: 25px;
+	line-height: 40px;
+}
+
+.beg-login-box .beg-login-main {
+	height: 385px;
+	padding: 30px 90px 0;
+}
+
+.beg-login-main .layui-form-item {
+	position: relative;
+}
+
+.login-icon {
+	position: absolute;
+	color: #cccccc;
+	top: 10px;
+	left: 10px;
+}
+
+.beg-login-main .layui-form-item input {
+	padding-left: 34px;
+	color: #929191;
+}
+
+.beg-login-box footer {
+	height: 35px;
+	padding: 20px 10px 0 10px;
+}
+
+.beg-login-box footer p {
+	line-height: 35px;
+	text-align: center;
+}
+
+.beg-pull-left {
+	float: left !important;
+}
+
+.beg-pull-right {
+	float: right !important;
+}
+
+.beg-clear {
+	clear: both;
+}
+
+.beg-login-remember {
+	line-height: 38px;
+	color: #777;
+}
+
+.beg-login-forget {
+	line-height: 38px;
+	color: #777;
+}
+
+.beg-login-remember .layui-form-switch {
+	margin-top: 0px;
+}
+
+.btn-submit {
+	width: 100%;
+	background-color: #0099CC;
+}
+
+.btn-reg {
+	width: 100%;
+	background-color: #0099CC;
+}
+
+.beg-login-code-box img {
+	cursor: pointer;
+	position: absolute;
+	width: 90px;
+	height: 30px;
+	right: 2px;
+	top: 5px;
+}

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.dao.RoleMapper">
+	<resultMap id="BaseResultMap" type="com.common.entity.Role">
+		<id column="w_role_id" jdbcType="INTEGER" property="wRoleId" />
+		<result column="w_role_father_id" jdbcType="INTEGER" property="wRoleFatherId" />
+		<result column="w_role_name" jdbcType="VARCHAR" property="wRoleName" />
+		<result column="w_role_createdate" jdbcType="TIMESTAMP"
+			property="wRoleCreatedate" />
+	</resultMap>
+	<resultMap extends="BaseResultMap" id="ResultMapWithBLOBs"
+		type="com.common.entity.Role">
+		<result column="w_role_description" jdbcType="LONGVARCHAR"
+			property="wRoleDescription" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		w_role_id, w_role_father_id, w_role_name, w_role_createdate
+	</sql>
+	<sql id="Blob_Column_List">
+		w_role_description
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="ResultMapWithBLOBs">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from w_role
+		where w_role_id = #{wRoleId,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from w_role
+		where w_role_id = #{wRoleId,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.common.entity.Role">
+		insert into w_role (w_role_id, w_role_father_id, w_role_name,
+		w_role_createdate, w_role_description
+		)
+		values (#{wRoleId,jdbcType=INTEGER}, #{wRoleFatherId,jdbcType=INTEGER},
+		#{wRoleName,jdbcType=VARCHAR},
+		#{wRoleCreatedate,jdbcType=TIMESTAMP}, #{wRoleDescription,jdbcType=LONGVARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.common.entity.Role">
+		insert into w_role
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="wRoleId != null">
+				w_role_id,
+			</if>
+			<if test="wRoleFatherId != null">
+				w_role_father_id,
+			</if>
+			<if test="wRoleName != null">
+				w_role_name,
+			</if>
+			<if test="wRoleCreatedate != null">
+				w_role_createdate,
+			</if>
+			<if test="wRoleDescription != null">
+				w_role_description,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="wRoleId != null">
+				#{wRoleId,jdbcType=INTEGER},
+			</if>
+			<if test="wRoleFatherId != null">
+				#{wRoleFatherId,jdbcType=INTEGER},
+			</if>
+			<if test="wRoleName != null">
+				#{wRoleName,jdbcType=VARCHAR},
+			</if>
+			<if test="wRoleCreatedate != null">
+				#{wRoleCreatedate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="wRoleDescription != null">
+				#{wRoleDescription,jdbcType=LONGVARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.common.entity.Role">
+		update w_role
+		<set>
+			<if test="wRoleFatherId != null">
+				w_role_father_id = #{wRoleFatherId,jdbcType=INTEGER},
+			</if>
+			<if test="wRoleName != null">
+				w_role_name = #{wRoleName,jdbcType=VARCHAR},
+			</if>
+			<if test="wRoleCreatedate != null">
+				w_role_createdate = #{wRoleCreatedate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="wRoleDescription != null">
+				w_role_description = #{wRoleDescription,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where w_role_id = #{wRoleId,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKeyWithBLOBs" parameterType="com.common.entity.Role">
+		update w_role
+		set w_role_father_id = #{wRoleFatherId,jdbcType=INTEGER},
+		w_role_name = #{wRoleName,jdbcType=VARCHAR},
+		w_role_createdate = #{wRoleCreatedate,jdbcType=TIMESTAMP},
+		w_role_description = #{wRoleDescription,jdbcType=LONGVARCHAR}
+		where w_role_id = #{wRoleId,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.common.entity.Role">
+		update w_role
+		set w_role_father_id = #{wRoleFatherId,jdbcType=INTEGER},
+		w_role_name = #{wRoleName,jdbcType=VARCHAR},
+		w_role_createdate = #{wRoleCreatedate,jdbcType=TIMESTAMP}
+		where w_role_id = #{wRoleId,jdbcType=INTEGER}
+	</update>
+</mapper>

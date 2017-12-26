@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.dao.OrganizationAuthorityRelationMapper">
+	<resultMap id="BaseResultMap"
+		type="com.common.entity.OrganizationAuthorityRelationKey">
+		<id column="w_organization_id" jdbcType="INTEGER" property="wOrganizationId" />
+		<id column="w_authority_id" jdbcType="INTEGER" property="wAuthorityId" />
+	</resultMap>
+	<delete id="deleteByPrimaryKey" parameterType="com.common.entity.OrganizationAuthorityRelationKey">
+		delete from w_organization_authority_relation
+		where w_organization_id = #{wOrganizationId,jdbcType=INTEGER}
+		and w_authority_id = #{wAuthorityId,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.common.entity.OrganizationAuthorityRelationKey">
+		insert into w_organization_authority_relation (w_organization_id,
+		w_authority_id)
+		values (#{wOrganizationId,jdbcType=INTEGER},
+		#{wAuthorityId,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective" parameterType="com.common.entity.OrganizationAuthorityRelationKey">
+		insert into w_organization_authority_relation
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="wOrganizationId != null">
+				w_organization_id,
+			</if>
+			<if test="wAuthorityId != null">
+				w_authority_id,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="wOrganizationId != null">
+				#{wOrganizationId,jdbcType=INTEGER},
+			</if>
+			<if test="wAuthorityId != null">
+				#{wAuthorityId,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+</mapper>

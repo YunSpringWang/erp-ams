@@ -1,0 +1,25 @@
+.handle-box .handle-item {
+    margin:5px 0;
+    overflow:hidden
+}
+.handle-item .layui-form-label {
+    width:auto
+}
+.handle-box .handle-item .fr {
+    line-height:38px
+}
+.fr {
+    float:right
+}
+
+.mgl-20 {
+    margin-left:20px
+}
+.tableTools {
+    position:relative
+}
+.tableTools .tableTools-box {
+    margin:10px 0;
+    display:inline-table;
+    position:relative
+}
