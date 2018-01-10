@@ -1,12 +1,14 @@
-<!--
-* 修改页面
-* @author chenyi
-* @email qq228112142@qq.com
-* @date 2017-11-06 14:49:28
-*-->
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+%><!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<base href="<%=basePath%>">
     <title>Title</title>
 </head>
 <body>
@@ -27,4 +29,3 @@
 
 </body>
 </html>
-

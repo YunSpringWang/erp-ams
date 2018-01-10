@@ -3,13 +3,13 @@ package com.menu;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.common.entity.Menu;
+import com.common.entity.SysMenu;
 
 public class TreeBuilder {
 
-	List<Menu> nodes = new ArrayList<Menu>();
+	List<SysMenu> nodes = new ArrayList<SysMenu>();
 
-	public TreeBuilder(List<Menu> nodes) {
+	public TreeBuilder(List<SysMenu> nodes) {
 		super();
 		this.nodes = nodes;
 	}
@@ -19,10 +19,10 @@ public class TreeBuilder {
 	 * 
 	 * @return
 	 */
-	public List<Menu> buildTree() {
-		List<Menu> treeNodes = new ArrayList<Menu>();
-		List<Menu> rootNodes = getRootNodes();
-		for (Menu rootNode : rootNodes) {
+	public List<SysMenu> buildTree() {
+		List<SysMenu> treeNodes = new ArrayList<SysMenu>();
+		List<SysMenu> rootNodes = getRootNodes();
+		for (SysMenu rootNode : rootNodes) {
 			buildChildNodes(rootNode);
 			treeNodes.add(rootNode);
 		}
@@ -34,10 +34,10 @@ public class TreeBuilder {
 	 * 
 	 * @param node
 	 */
-	public void buildChildNodes(Menu node) {
-		List<Menu> children = getChildNodes(node);
+	public void buildChildNodes(SysMenu node) {
+		List<SysMenu> children = getChildNodes(node);
 		if (!children.isEmpty()) {
-			for (Menu child : children) {
+			for (SysMenu child : children) {
 				buildChildNodes(child);
 			}
 			node.setChildren(children);
@@ -51,10 +51,10 @@ public class TreeBuilder {
 	 * @param pnode
 	 * @return
 	 */
-	public List<Menu> getChildNodes(Menu pnode) {
-		List<Menu> childNodes = new ArrayList<Menu>();
-		for (Menu n : nodes) {
-			if (pnode.getwMenuId().equals(n.getwMenuFatherId()) && !n.getwMenuFatherId().equals(n.getwMenuId())) {
+	public List<SysMenu> getChildNodes(SysMenu pnode) {
+		List<SysMenu> childNodes = new ArrayList<SysMenu>();
+		for (SysMenu n : nodes) {
+			if (pnode.getMenuId().equals(n.getMenuFatherId()) && !n.getMenuFatherId().equals(n.getMenuId())) {
 				childNodes.add(n);
 			}
 		}
@@ -68,9 +68,9 @@ public class TreeBuilder {
 	 * @param inNode
 	 * @return
 	 */
-	public boolean rootNode(Menu node) {
+	public boolean rootNode(SysMenu node) {
 		boolean isRootNode = false;
-		if (node.getwMenuFatherId().equals(node.getwMenuId())) {
+		if (node.getMenuFatherId().equals(node.getMenuId())) {
 			isRootNode = true;
 		}
 		return isRootNode;
@@ -82,9 +82,9 @@ public class TreeBuilder {
 	 * @param nodes
 	 * @return
 	 */
-	public List<Menu> getRootNodes() {
-		List<Menu> rootNodes = new ArrayList<Menu>();
-		for (Menu n : nodes) {
+	public List<SysMenu> getRootNodes() {
+		List<SysMenu> rootNodes = new ArrayList<SysMenu>();
+		for (SysMenu n : nodes) {
 			if (rootNode(n)) {
 				rootNodes.add(n);
 			}

@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.common.entity.SysLoginLogs;
 import com.common.entity.UserLogin;
-import com.common.entity.UserLoginLogs;
 import com.service.login.LoginService;
 import com.service.logs.UserLoginLogsService;
 import com.util.MD5Util;
@@ -43,7 +43,7 @@ public class UserLoginController {
 
 	@RequestMapping(value = "/toLogin")
 	public String toLogin() {
-		return "/login";
+		return "/views/login";
 	}
 
 	@RequestMapping(value = "/regUser", method = RequestMethod.POST)
@@ -53,21 +53,21 @@ public class UserLoginController {
 		if (user != null) {
 
 			// 判断用户名是否可用
-			if (userLoginService.hasLoginUserName(user.getwLoginAccount())) {
+			if (userLoginService.hasLoginUserName(user.getLoginAccount())) {
 				model.addAttribute("info", "用户名已存在，请重新输入");
 				return "/user/regPage";
 			} else {
 
 				// 用MD5对密码加密处理，生成32位字符
-				String password = user.getwLoginPassword();
+				String password = user.getLoginPassword();
 				String passwodmd5 = MD5Util.MD5EncodeUpper(password, charsetname);
-				user.setwLoginPassword(passwodmd5);
+				user.setLoginPassword(passwodmd5);
 				// 设置状态（1为可用，0为不可用）
-				user.setwLoginStatus(1);
+				user.setLoginStatus(1);
 				// 设置注册时间，创建时间
-				user.setwLoginCreatetime(VeDate.getTimestampDate());
+				user.setLoginCreateDate(VeDate.getTimestampDate());
 				// 设置用户编号，用UUID来作为唯一标识
-				user.setwLoginId(uuid);
+				user.setLoginId(uuid);
 
 				userLoginService.addLoginUser(user);
 
@@ -96,8 +96,8 @@ public class UserLoginController {
 		long startTime = System.currentTimeMillis(); // 开始时间
 
 		log.info("登录提交....");
-		String password = user.getwLoginPassword();
-		user.setwLoginPassword(MD5Util.MD5Encode(password, charsetname));
+		String password = user.getLoginPassword();
+		user.setLoginPassword(MD5Util.MD5Encode(password, charsetname));
 
 		String code = (String) request.getSession().getAttribute("randCode");// 得到session中的正确验证码
 		System.out.println(code + user);
@@ -112,17 +112,17 @@ public class UserLoginController {
 			// 将登录用户加入到session里
 			// request.getSession().setAttribute("loginUser", user);
 			// 创建登录log
-			UserLoginLogs userLoginLogs = new UserLoginLogs();
-			userLoginLogs.setwLoginId(userLoginService.getloginUser(user).getwLoginId());
-			userLoginLogs.setwLoginLogsCreatedate(VeDate.getTimestampDate());
-			userLoginLogs.setwLoginLogsId(uuid);
-			userLoginLogs.setwLoginLogsIp(InetAddress.getLocalHost().getHostAddress().toString());
-			userLoginLogs.setwLoginLogsMac(getMACAddress(InetAddress.getLocalHost()));
-			userLoginLogs.setwLoginLogsSystype(1);
-			long endTime = System.currentTimeMillis(); // 结束时间
+			SysLoginLogs userLoginLogs = new SysLoginLogs();
+			userLoginLogs.setLoginId((userLoginService.getloginUser(user).getLoginId()));
+			userLoginLogs.setSysLoginLogsCreateDate(VeDate.getTimestampDate());
+			userLoginLogs.setSysLoginLogsId(uuid);
+			userLoginLogs.setSysLoginLogsIp(InetAddress.getLocalHost().getHostAddress().toString());
+			userLoginLogs.setSysLoginLogsMac(getMACAddress(InetAddress.getLocalHost()));
+			userLoginLogs.setSysLoginLogsSystype(1);
+			long endTime = System.currentTimeMillis(); // 结束时间s
 
 			log.info("登录验证通过...登录验证用时为:" + (endTime - startTime));
-			userLoginLogs.setwLoginLogsDescription("登录验证通过...登录验证用时为:" + (endTime - startTime) + "毫秒");
+			userLoginLogs.setSysLoginLogsDescription("登录验证通过...登录验证用时为:" + (endTime - startTime) + "毫秒");
 			userLoginLogsService.insertUserLoginLogs(userLoginLogs);
 			map.put("status", "1");
 			map.put("info",  "登录验证通过...登录验证用时为:" + (endTime - startTime) + "毫秒");
@@ -138,7 +138,6 @@ public class UserLoginController {
 
 		}
 	}
-
 	// 获取MAC地址的方法
 	private static String getMACAddress(InetAddress ia) throws Exception {
 		// 获得网络接口对象（即网卡），并得到mac地址，mac地址存在于一个byte数组中。

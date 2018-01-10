@@ -3,83 +3,83 @@ package com.common.entity;
 import java.util.Date;
 
 public class UserLogin {
-    private String wLoginId;
+    private String loginId;
 
-    private String wUserId;
+    private String userId;
 
-    private String wLoginAccount;
+    private String loginAccount;
 
-    private String wLoginPassword;
+    private String loginPassword;
 
-    private String wLoginQuestion;
+    private String loginQuestion;
 
-    private String wLoginAnswer;
+    private String loginAnswer;
 
-    private Integer wLoginStatus;
+    private Integer loginStatus;
 
-    private Date wLoginCreatetime;
+    private Date loginCreateDate;
 
-    public String getwLoginId() {
-        return wLoginId;
+    public String getLoginId() {
+        return loginId;
     }
 
-    public void setwLoginId(String wLoginId) {
-        this.wLoginId = wLoginId == null ? null : wLoginId.trim();
+    public void setLoginId(String loginId) {
+        this.loginId = loginId == null ? null : loginId.trim();
     }
 
-    public String getwUserId() {
-        return wUserId;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setwUserId(String wUserId) {
-        this.wUserId = wUserId == null ? null : wUserId.trim();
+    public void setUserId(String userId) {
+        this.userId = userId == null ? null : userId.trim();
     }
 
-    public String getwLoginAccount() {
-        return wLoginAccount;
+    public String getLoginAccount() {
+        return loginAccount;
     }
 
-    public void setwLoginAccount(String wLoginAccount) {
-        this.wLoginAccount = wLoginAccount == null ? null : wLoginAccount.trim();
+    public void setLoginAccount(String loginAccount) {
+        this.loginAccount = loginAccount == null ? null : loginAccount.trim();
     }
 
-    public String getwLoginPassword() {
-        return wLoginPassword;
+    public String getLoginPassword() {
+        return loginPassword;
     }
 
-    public void setwLoginPassword(String wLoginPassword) {
-        this.wLoginPassword = wLoginPassword == null ? null : wLoginPassword.trim();
+    public void setLoginPassword(String loginPassword) {
+        this.loginPassword = loginPassword == null ? null : loginPassword.trim();
     }
 
-    public String getwLoginQuestion() {
-        return wLoginQuestion;
+    public String getLoginQuestion() {
+        return loginQuestion;
     }
 
-    public void setwLoginQuestion(String wLoginQuestion) {
-        this.wLoginQuestion = wLoginQuestion == null ? null : wLoginQuestion.trim();
+    public void setLoginQuestion(String loginQuestion) {
+        this.loginQuestion = loginQuestion == null ? null : loginQuestion.trim();
     }
 
-    public String getwLoginAnswer() {
-        return wLoginAnswer;
+    public String getLoginAnswer() {
+        return loginAnswer;
     }
 
-    public void setwLoginAnswer(String wLoginAnswer) {
-        this.wLoginAnswer = wLoginAnswer == null ? null : wLoginAnswer.trim();
+    public void setLoginAnswer(String loginAnswer) {
+        this.loginAnswer = loginAnswer == null ? null : loginAnswer.trim();
     }
 
-    public Integer getwLoginStatus() {
-        return wLoginStatus;
+    public Integer getLoginStatus() {
+        return loginStatus;
     }
 
-    public void setwLoginStatus(Integer wLoginStatus) {
-        this.wLoginStatus = wLoginStatus;
+    public void setLoginStatus(Integer loginStatus) {
+        this.loginStatus = loginStatus;
     }
 
-    public Date getwLoginCreatetime() {
-        return wLoginCreatetime;
+    public Date getLoginCreateDate() {
+        return loginCreateDate;
     }
 
-    public void setwLoginCreatetime(Date wLoginCreatetime) {
-        this.wLoginCreatetime = wLoginCreatetime;
+    public void setLoginCreateDate(Date loginCreateDate) {
+        this.loginCreateDate = loginCreateDate;
     }
 }

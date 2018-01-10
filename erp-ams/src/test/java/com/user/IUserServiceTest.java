@@ -6,7 +6,6 @@ import java.net.UnknownHostException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 import java.util.UUID;
 
 import org.apache.log4j.Logger;
@@ -17,14 +16,15 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.alibaba.fastjson.JSON;
-import com.common.entity.AuthorityMenuKey;
-import com.common.entity.Menu;
+import com.common.entity.SysLoginLogs;
+import com.common.entity.SysOrganization;
+import com.common.entity.SysUser;
 import com.common.entity.UserLogin;
-import com.common.entity.UserLoginLogs;
-import com.menu.TreeBuilder;
 import com.service.index.IndexService;
 import com.service.login.LoginService;
 import com.service.logs.UserLoginLogsService;
+import com.service.org.OrganizationService;
+import com.service.user.UserService;
 import com.util.MD5Util;
 
 /**
@@ -37,6 +37,13 @@ public class IUserServiceTest {
 	private static Logger logger = Logger.getLogger(IUserServiceTest.class);
 	@Autowired
 	public LoginService userloginService;
+	
+	@Autowired
+	public OrganizationService orgService;
+	
+	@Autowired
+	public UserService userService;
+	
 	@Autowired
 	private UserLoginLogsService userLoginLogsService;
 
@@ -59,37 +66,76 @@ public class IUserServiceTest {
 
 	@Test
 	public void addUserLogin() {
-		UserLogin user = new UserLogin();
-		String wLoginAccount = "test";
-		String wLoginQuestion = "年龄";
-		String wLoginAnswer = "12";
-		Date currentTime = new Date();
+		Date Time = new Date();
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		String dateString = formatter.format(currentTime);
-		Timestamp ts = Timestamp.valueOf(dateString);
-		user.setwLoginCreatetime(ts);
-		user.setwLoginAccount(wLoginAccount);
-		user.setwLoginAnswer(wLoginAnswer);
-		String wLoginPassword = "test";
-		String password = MD5Util.MD5EncodeUpper(wLoginPassword, "UTF-8");
-		logger.info("MD5后的密码：" + password);
-		logger.info("时间为：" + currentTime);
-		user.setwLoginPassword(password);
+		UserLogin userlogin = new UserLogin();
+		SysUser user = new SysUser();
+		SysOrganization org =new SysOrganization();
+		
+		int orgId = 2;
+		int orgFaterId=1;
+		org.setOrgId(orgId);
+		org.setOrgCreateDate(Time);
+		org.setOrgFaterId(orgFaterId);
+		org.setOrgName("测试机构02");
+		org.setOrgDescription("测试机构添加");
+		
+		orgService.addOrganization(org);
+		
+		String userId ="123";
+		String userName="测试用户";
+		int userAge =24;
+		String userEmail= "123455678@qq.com";
+		String userPhone = "13125864856";
+		String userTel="023-58748635";
+		user.setUserId(userId);
+		user.setUserName(userName);
+		user.setUserCreateDate(Time);
+		user.setUserStatus(1);
+		user.setOrgId(orgId);
+		user.setUserAge(userAge);
+		user.setUserEmail(userEmail);
+		user.setUserPhone(userPhone);
+		user.setUserSex(1);
+		user.setUserTel(userTel);
+		
+	//	userService.addUser(user);
+
+		
 		UUID uuid = UUID.randomUUID();
 		String id = uuid.toString().replaceAll("-", "").toUpperCase();
+		String wLoginAccount = "test01";
+		String wLoginQuestion = "年龄";
+		String wLoginAnswer = "12";
+		String wLoginPassword = "test01";
+		String password = MD5Util.MD5EncodeUpper(wLoginPassword, "UTF-8");
+		
+		
+	//	String dateString = formatter.format(currentTime);
+	//	Timestamp ts = Timestamp.valueOf(dateString);
+		userlogin.setLoginId(id);
+		userlogin.setLoginCreateDate(Time);
+		userlogin.setLoginAccount(wLoginAccount);
+		userlogin.setLoginAnswer(wLoginAnswer);	
+		userlogin.setLoginPassword(password);
+		userlogin.setLoginQuestion(wLoginQuestion);
+		userlogin.setLoginStatus(1);
+		userlogin.setUserId(userId);
+		
 
-		user.setwLoginId(id);
-		user.setwLoginQuestion(wLoginQuestion);
-		user.setwLoginStatus(1);
-		userloginService.addLoginUser(user);
+		logger.info("MD5后的密码：" + password);
+		logger.info("时间为：" + Time);
+	//	userloginService.addLoginUser(userlogin);
+
 
 	}
 
 	@Test
 	public void isUserName() {
 
-		String wLoginAccount = "testadduserlogin";
+		String wLoginAccount = "test01";
 
+		
 		boolean t = userloginService.hasLoginUserName(wLoginAccount);
 		System.out.println(t);
 		logger.info(t);
@@ -99,10 +145,10 @@ public class IUserServiceTest {
 	@Test
 	public void login() {
 		UserLogin user = new UserLogin();
-		String wLoginAccount = "testadduserlogin";
-		String password = "test@12345.com";
-		user.setwLoginAccount(wLoginAccount);
-		user.setwLoginPassword(MD5Util.MD5Encode(password, "UTF-8"));
+		String wLoginAccount = "test01";
+		String password = "test01";
+		user.setLoginAccount(wLoginAccount);
+		user.setLoginPassword(MD5Util.MD5Encode(password, "UTF-8"));
 		boolean flag = userloginService.loginUser(user);
 		System.out.println(flag);
 		logger.info(flag);
@@ -112,26 +158,24 @@ public class IUserServiceTest {
 	@Test
 	public void insertuserlog() {
 		// 创建登录log
-		UserLoginLogs userLoginLogs = new UserLoginLogs();
+		SysLoginLogs userLoginLogs = new SysLoginLogs();
+		UUID uuid = UUID.randomUUID();
+		String id = uuid.toString().replaceAll("-", "").toUpperCase();
+		userLoginLogs.setSysLoginLogsId(id);
+		
 		UserLogin user = new UserLogin();
-		user.setwLoginAccount("testadduserlogin");
-		// userLoginLogs.setwLoginId(userloginService.getloginUser(user).getwLoginId());
-		Date currentTime = new Date();
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		String dateString = formatter.format(currentTime);
-		Timestamp ts = Timestamp.valueOf(dateString);
-		System.out.println(ts);
-
-		userLoginLogs.setwLoginLogsCreatedate(ts);
-		userLoginLogs.setwLoginLogsId("123456");
+		user.setLoginAccount("test01");
+		userLoginLogs.setLoginId(userloginService.getloginUser(user).getLoginId());
+		
+		userLoginLogs.setSysLoginLogsCreateDate(new Date());
 		try {
-			userLoginLogs.setwLoginLogsIp(InetAddress.getLocalHost().getHostAddress().toString());
+			userLoginLogs.setSysLoginLogsIp(InetAddress.getLocalHost().getHostAddress().toString());
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		try {
-			userLoginLogs.setwLoginLogsMac(getMACAddress(InetAddress.getLocalHost()));
+			userLoginLogs.setSysLoginLogsMac(getMACAddress(InetAddress.getLocalHost()));
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -139,8 +183,8 @@ public class IUserServiceTest {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		userLoginLogs.setwLoginLogsSystype(1);
-		// userLoginLogs.setwLoginLogsDescription("登录测试");
+		userLoginLogs.setSysLoginLogsSystype(1);
+		userLoginLogs.setSysLoginLogsDescription("登录测试");
 		System.out.println(JSON.toJSONString(userLoginLogs));
 		System.out.println("添加的LOG数据为：" + userLoginLogs.toString());
 
@@ -167,14 +211,14 @@ public class IUserServiceTest {
 		return sb.toString().toUpperCase();
 	}
 
-	@Test
+/*	@Test
 	public void selectMenuIdByAuthorityIdTest() {
-		AuthorityMenuKey authority = new AuthorityMenuKey();
-		authority.setwAuthorityId(1);
+		AuthorityMenuRelationKey authority = new AuthorityMenuRelationKey();
+		authority.setSysAuthorityId(1);
 		List<Menu> menulist = indexService.menuList(authority);
 		  TreeBuilder treeBuilder = new TreeBuilder(menulist);
 	        System.out.println(treeBuilder.buildTree());
 	        String json = JSON.toJSONString(treeBuilder.buildTree());
 	        System.out.println("构建JSON树形结构"+json);
-	}
+	}*/
 }

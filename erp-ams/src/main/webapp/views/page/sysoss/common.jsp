@@ -46,5 +46,3 @@
     <div cyType="selectTool" cyProps="codeName:'state',search:'true'"
          name="state" value="${model.state}" class="layui-input-normal"></div>
 </div>
-
-      

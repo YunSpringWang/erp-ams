@@ -2,18 +2,27 @@ package com.service.index.impl;
 
 import java.util.ArrayList;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.common.dao.AuthorityMenuMapper;
-import com.common.dao.MenuMapper;
-import com.common.entity.AuthorityMenuKey;
-import com.common.entity.Menu;
+import com.common.entity.AuthorityMenuRelationKey;
+import com.common.entity.SysMenu;
 import com.service.index.IndexService;
 
-@Repository("IndexService")
+@Repository("indexService")
 public class IndexServiceImpl implements IndexService {
 
+	@Override
+	public ArrayList<SysMenu> menuList(AuthorityMenuRelationKey authority) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<SysMenu> menuListByMenu(Integer wMenuFatherId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+/*
 	@Autowired
 	private MenuMapper menuMapper;
 	@Autowired
@@ -37,5 +46,5 @@ public class IndexServiceImpl implements IndexService {
 		menulist = menuMapper.selectByMenuFatherId(wMenuId);	
 		return menulist;
 	}
-
+*/
 }

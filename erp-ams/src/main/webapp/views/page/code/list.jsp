@@ -8,6 +8,7 @@
 <html>
 <head>
     <title>表码</title>
+    
     <script type="text/javascript" src="/page/code/js/list.js"></script>
 </head>
 <body>

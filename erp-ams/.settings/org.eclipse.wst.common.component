@@ -5,6 +5,7 @@
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/resources"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/doc"/>
         <property name="context-root" value="erp-ams"/>
         <property name="java-output-path" value="/erp-ams/target/classes"/>
     </wb-module>

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.alibaba.fastjson.JSON;
-import com.common.entity.Menu;
+import com.common.entity.SysMenu;
 
 
 public class MenuTest {
@@ -12,38 +12,38 @@ public class MenuTest {
      * @param args 
      */  
     public static void main(String[] args) {  
-        List<Menu> menus = new ArrayList<Menu>();
-        Menu menu = new Menu();
-        menu.setwMenuId(1);
-        menu.setwMenuName("根目录");
-        menu.setwMenuFatherId(1);
-        menu.setwMenuUrl(null);
-        menu.setwMenuController(null);
-        menu.setwMenuIcon("123");
+        List<SysMenu> menus = new ArrayList<SysMenu>();
+        SysMenu menu = new SysMenu();
+        menu.setMenuId(1);
+        menu.setMenuName("根目录");
+        menu.setMenuFatherId(1);
+        menu.setMenuUrl(null);
+        menu.setMenuController(null);
+        menu.setMenuIcon("123");
         menus.add(menu);
-        Menu menu1 = new Menu();
-        menu1.setwMenuId(2);
-        menu1.setwMenuName("百度搜索");
-        menu1.setwMenuFatherId(1);
-        menu1.setwMenuUrl("http://www.baidu.com");
-        menu1.setwMenuController(null);
-        menu1.setwMenuIcon("123");
+        SysMenu menu1 = new SysMenu();
+        menu1.setMenuId(2);
+        menu1.setMenuName("百度搜索");
+        menu1.setMenuFatherId(1);
+        menu1.setMenuUrl("http://www.baidu.com");
+        menu1.setMenuController(null);
+        menu1.setMenuIcon("123");
         menus.add(menu1); 
-        Menu menu2 = new Menu();
-        menu2.setwMenuId(3);
-        menu2.setwMenuName("搜狗搜索");
-        menu2.setwMenuFatherId(1);
-        menu2.setwMenuUrl("http://www.sogou.com");
-        menu2.setwMenuController(null);
-        menu2.setwMenuIcon("123");
+        SysMenu menu2 = new SysMenu();
+        menu2.setMenuId(3);
+        menu2.setMenuName("搜狗搜索");
+        menu2.setMenuFatherId(1);
+        menu2.setMenuUrl("http://www.sogou.com");
+        menu2.setMenuController(null);
+        menu2.setMenuIcon("123");
         menus.add(menu2); 
-        Menu menu3 = new Menu();
-        menu3.setwMenuId(4);
-        menu3.setwMenuName("百度搜索");
-        menu3.setwMenuFatherId(1);
-        menu3.setwMenuUrl("http://www.sogou.com");
-        menu3.setwMenuController(null);
-        menu3.setwMenuIcon("123");
+        SysMenu menu3 = new SysMenu();
+        menu3.setMenuId(4);
+        menu3.setMenuName("百度搜索");
+        menu3.setMenuFatherId(1);
+        menu3.setMenuUrl("http://www.sogou.com");
+        menu3.setMenuController(null);
+        menu3.setMenuIcon("123");
         menus.add(menu3); 
        // HtmlMenuTree tree = new HtmlMenuTree(menus);
         TreeBuilder treeBuilder = new TreeBuilder(menus);

@@ -1,23 +1,23 @@
 package com.common.entity;
 
 public class RoleAuthorityRelationKey {
-    private Integer wRoleId;
+    private Integer roleId;
 
-    private Integer wAuthorityId;
+    private Integer sysAuthorityId;
 
-    public Integer getwRoleId() {
-        return wRoleId;
+    public Integer getRoleId() {
+        return roleId;
     }
 
-    public void setwRoleId(Integer wRoleId) {
-        this.wRoleId = wRoleId;
+    public void setRoleId(Integer roleId) {
+        this.roleId = roleId;
     }
 
-    public Integer getwAuthorityId() {
-        return wAuthorityId;
+    public Integer getSysAuthorityId() {
+        return sysAuthorityId;
     }
 
-    public void setwAuthorityId(Integer wAuthorityId) {
-        this.wAuthorityId = wAuthorityId;
+    public void setSysAuthorityId(Integer sysAuthorityId) {
+        this.sysAuthorityId = sysAuthorityId;
     }
 }

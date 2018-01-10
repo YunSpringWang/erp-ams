@@ -4,8 +4,7 @@
 	<properties resource="jdbc.properties" />
 
 	<classPathEntry
-		location="E:/maven-warehouse/mysql/mysql-connector-java/5.1.35/mysql-connector-java-5.1.35.jar" />
-
+		location="D:/maven-warehouse/mysql/mysql-connector-java/5.1.35/mysql-connector-java-5.1.35.jar" />
 	<context id="FCRMTables">
 
 		<commentGenerator>
@@ -22,19 +21,19 @@
 		</javaTypeResolver>
 
 		<javaModelGenerator targetPackage="com.common.entity"
-			targetProject="wpm_ssm/src/main/java">
+			targetProject="erp-ams/src/main/java">
 			<property name="enableSubPackages" value="true" />
 
 			<property name="trimStrings" value="true" />
 		</javaModelGenerator>
 
 		<sqlMapGenerator targetPackage="com.common.mapper"
-			targetProject="wpm_ssm/src/main/java">
+			targetProject="erp-ams/src/main/java">
 			<property name="enableSubPackages" value="true" />
 		</sqlMapGenerator>
 
 		<javaClientGenerator targetPackage="com.common.dao"
-			targetProject="wpm_ssm/src/main/java" type="XMLMAPPER">
+			targetProject="erp-ams/src/main/java" type="XMLMAPPER">
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
 		<!-- schema即为数据库名, tableName为对应的数据库表, domainObjectName是要生成的实体类, -->
@@ -47,80 +46,71 @@
 			12，enableUpdateByExample（默认true）：MyBatis3Simple为false，指定是否生成动态修改语句（只修改对象中不为空的属性）； 
 			13，modelType：参考context元素的defaultModelType，相当于覆盖； 14，delimitIdentifiers：参考tableName的解释，注意，默认的delimitIdentifiers是双引号，如果类似MYSQL这样的数据库，使用的是`（反引号，那么还需要设置context的beginningDelimiter和endingDelimiter属性） 
 			15，delimitAllColumns：设置是否所有生成的SQL中的列名都使用标识符引起来。默认为false，delimitIdentifiers参考context的属性 -->
-		<table schema="wpm_db" tableName="w_authority" domainObjectName="Authority"
+		<table schema="erp-ams" tableName="authority_menu_relation" domainObjectName="AuthorityMenuRelation"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false">
 		</table>
 
-		<table schema="wpm_db" tableName="w_authority_menu"
-			domainObjectName="AuthorityMenu" enableSelectByExample="false"
+		<table schema="erp-ams" tableName="authority_org_relation"
+			domainObjectName="AuthorityOrgRelation" enableSelectByExample="false"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false"></table>
 
-		<table schema="wpm_db" tableName="w_dictionary"
-			domainObjectName="Dictionary" enableSelectByExample="false"
+		<table schema="erp-ams" tableName="code_data"
+			domainObjectName="CodeData" enableSelectByExample="false"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false"></table>
 
-		<table schema="wpm_db" tableName="w_dictionary_data"
-			domainObjectName="DictionaryData" enableSelectByExample="false"
-			enableCountByExample="false" enableUpdateByExample="false"
-			enableDeleteByExample="false"></table>
-
-		<table schema="wpm_db" tableName="w_expertion_logs"
-			domainObjectName="ExpertionLogs" enableSelectByExample="false"
-			enableCountByExample="false" enableUpdateByExample="false"
-			enableDeleteByExample="false"></table>
-
-		<table schema="wpm_db" tableName="w_menu" domainObjectName="Menu"
-			enableSelectByExample="false" enableCountByExample="false"
-			enableUpdateByExample="false" enableDeleteByExample="false"></table>
-
-		<table schema="wpm_db" tableName="w_organization"
-			domainObjectName="Organization" enableSelectByExample="false"
-			enableCountByExample="false" enableUpdateByExample="false"
-			enableDeleteByExample="false"></table>
-
-		<table schema="wpm_db" tableName="w_organization_authority_relation"
-			domainObjectName="OrganizationAuthorityRelation"
-			enableSelectByExample="false" enableCountByExample="false"
-			enableUpdateByExample="false" enableDeleteByExample="false"></table>
-
-
-		<table schema="wpm_db" tableName="w_role" domainObjectName="Role"
-			enableSelectByExample="false" enableCountByExample="false"
-			enableUpdateByExample="false" enableDeleteByExample="false"></table>
-
-		<table schema="wpm_db" tableName="w_role_authority_relation"
+		<table schema="erp-ams" tableName="role_authority_relation"
 			domainObjectName="RoleAuthorityRelation" enableSelectByExample="false"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false"></table>
 
-		<table schema="wpm_db" tableName="w_role_organization_relation"
-			domainObjectName="RoleOrganizationRelation" enableSelectByExample="false"
+		<table schema="erp-ams" tableName="role_org_relation"
+			domainObjectName="RoleOrgRelation" enableSelectByExample="false"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false"></table>
 
-		<table schema="wpm_db" tableName="w_role_user_relation"
-			domainObjectName="RoleUserRelation" enableSelectByExample="false"
-			enableCountByExample="false" enableUpdateByExample="false"
-			enableDeleteByExample="false"></table>
-
-
-		<table schema="wpm_db" tableName="w_user" domainObjectName="User"
+		<table schema="erp-ams" tableName="sys_authority" domainObjectName="SysAuthority"
 			enableSelectByExample="false" enableCountByExample="false"
 			enableUpdateByExample="false" enableDeleteByExample="false"></table>
-		<table schema="wpm_db" tableName="w_user_authority_relation"
-			domainObjectName="UserAuthorityRelation" enableSelectByExample="false"
+
+		<table schema="erp-ams" tableName="sys_code"
+			domainObjectName="SysCode" enableSelectByExample="false"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false"></table>
 
-		<table schema="wpm_db" tableName="w_user_login"
-			domainObjectName="UserLogin" enableSelectByExample="false"
+		<table schema="erp-ams" tableName="sys_excepetion_logs"
+			domainObjectName="SysExcepetionLogs"
+			enableSelectByExample="false" enableCountByExample="false"
+			enableUpdateByExample="false" enableDeleteByExample="false"></table>
+
+
+		<table schema="erp-ams" tableName="sys_login_logs" domainObjectName="SysLoginLogs"
+			enableSelectByExample="false" enableCountByExample="false"
+			enableUpdateByExample="false" enableDeleteByExample="false"></table>
+
+		<table schema="erp-ams" tableName="sys_menu"
+			domainObjectName="SysMenu" enableSelectByExample="false"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false"></table>
-		<table schema="wpm_db" tableName="w_user_login_logs"
-			domainObjectName="UserLoginLogs" enableSelectByExample="false"
+
+		<table schema="erp-ams" tableName="sys_organization"
+			domainObjectName="SysOrganization" enableSelectByExample="false"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false"></table>
+
+		<table schema="erp-ams" tableName="sys_role"
+			domainObjectName="SysRole" enableSelectByExample="false"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false"></table>
+
+
+		<table schema="erp-ams" tableName="sys_user" domainObjectName="SysUser"
+			enableSelectByExample="false" enableCountByExample="false"
+			enableUpdateByExample="false" enableDeleteByExample="false"></table>
+		<table schema="erp-ams" tableName="user_login"
+			domainObjectName="UserLogin" enableSelectByExample="false"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false"></table>
 	</context>

@@ -1,178 +1,151 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.common.dao.UserLoginMapper">
-	<resultMap id="BaseResultMap" type="com.common.entity.UserLogin">
-		<id column="w_login_id" jdbcType="VARCHAR" property="wLoginId" />
-		<result column="w_user_id" jdbcType="VARCHAR" property="wUserId" />
-		<result column="w_login_account" jdbcType="VARCHAR" property="wLoginAccount" />
-		<result column="w_login_password" jdbcType="VARCHAR" property="wLoginPassword" />
-		<result column="w_login_question" jdbcType="VARCHAR" property="wLoginQuestion" />
-		<result column="w_login_answer" jdbcType="VARCHAR" property="wLoginAnswer" />
-		<result column="w_login_status" jdbcType="INTEGER" property="wLoginStatus" />
-		<result column="w_login_createtime" jdbcType="TIMESTAMP"
-			property="wLoginCreatetime" />
-	</resultMap>
-	<sql id="Base_Column_List">
-		w_login_id, w_user_id, w_login_account, w_login_password,
-		w_login_question,
-		w_login_answer,
-		w_login_status, w_login_createtime
-	</sql>
-	<select id="selectByPrimaryKey" parameterType="java.lang.String"
-		resultMap="BaseResultMap">
-		select
-		<include refid="Base_Column_List" />
-		from w_user_login
-		where w_login_id = #{wLoginId,jdbcType=VARCHAR}
-	</select>
-
-	<select id="selectByUserLogin" parameterType="com.common.entity.UserLogin"
-		resultMap="BaseResultMap">
-		select
-		<include refid="Base_Column_List" />
-		from w_user_login
-		where 1=1
-		<if test="wLoginId != null">
-			and w_login_id=#{wLoginId}
-		</if>
-		<if test="wUserId != null">
-			and w_user_id=#{wUserId}
-		</if>
-		<if test="wLoginPassword != null">
-			and w_login_password=#{wLoginPassword}
-		</if>
-		<if test="wLoginAccount != null">
-			and w_login_account=#{wLoginAccount}
-		</if>
-		<if test="wLoginQuestion != null">
-			and w_login_question=#{wLoginQuestion}
-		</if>
-		<if test="wLoginStatus != null">
-			and w_login_status=#{wLoginStatus}
-		</if>
-		<if test="wLoginCreatetime != null">
-			and w_login_createtime=#{wLoginCreatetime}
-		</if>
-	</select>
-
-	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-		delete from
-		w_user_login
-		where w_login_id = #{wLoginId,jdbcType=VARCHAR}
-	</delete>
-	<insert id="insert" parameterType="com.common.entity.UserLogin">
-		insert into w_user_login
-		(w_login_id, w_user_id, w_login_account,
-		w_login_password,
-		w_login_question, w_login_answer,
-		w_login_status, w_login_createtime)
-		values (#{wLoginId,jdbcType=VARCHAR}, #{wUserId,jdbcType=VARCHAR},
-		#{wLoginAccount,jdbcType=VARCHAR},
-		#{wLoginPassword,jdbcType=VARCHAR},
-		#{wLoginQuestion,jdbcType=VARCHAR}, #{wLoginAnswer,jdbcType=VARCHAR},
-		#{wLoginStatus,jdbcType=INTEGER},
-		#{wLoginCreatetime,jdbcType=TIMESTAMP})
-	</insert>
-
-	<insert id="insertSelective" parameterType="com.common.entity.UserLogin">
-		insert into w_user_login
-		<trim prefix="(" suffix=")" suffixOverrides=",">
-			<if test="wLoginId != null">
-				w_login_id,
-			</if>
-			<if test="wUserId != null">
-				w_user_id,
-			</if>
-			<if test="wLoginAccount != null">
-				w_login_account,
-			</if>
-			<if test="wLoginPassword != null">
-				w_login_password,
-			</if>
-			<if test="wLoginQuestion != null">
-				w_login_question,
-			</if>
-			<if test="wLoginAnswer != null">
-				w_login_answer,
-			</if>
-			<if test="wLoginStatus != null">
-				w_login_status,
-			</if>
-			<if test="wLoginCreatetime != null">
-				w_login_createtime,
-			</if>
-		</trim>
-		<trim prefix="values (" suffix=")" suffixOverrides=",">
-			<if test="wLoginId != null">
-				#{wLoginId,jdbcType=VARCHAR},
-			</if>
-			<if test="wUserId != null">
-				#{wUserId,jdbcType=VARCHAR},
-			</if>
-			<if test="wLoginAccount != null">
-				#{wLoginAccount,jdbcType=VARCHAR},
-			</if>
-			<if test="wLoginPassword != null">
-				#{wLoginPassword,jdbcType=VARCHAR},
-			</if>
-			<if test="wLoginQuestion != null">
-				#{wLoginQuestion,jdbcType=VARCHAR},
-			</if>
-			<if test="wLoginAnswer != null">
-				#{wLoginAnswer,jdbcType=VARCHAR},
-			</if>
-			<if test="wLoginStatus != null">
-				#{wLoginStatus,jdbcType=INTEGER},
-			</if>
-			<if test="wLoginCreatetime != null">
-				#{wLoginCreatetime,jdbcType=TIMESTAMP},
-			</if>
-		</trim>
-	</insert>
-	<update id="updateByPrimaryKeySelective" parameterType="com.common.entity.UserLogin">
-		update w_user_login
-		<set>
-			<if test="wUserId != null">
-				w_user_id = #{wUserId,jdbcType=VARCHAR},
-			</if>
-			<if test="wLoginAccount != null">
-				w_login_account = #{wLoginAccount,jdbcType=VARCHAR},
-			</if>
-			<if test="wLoginPassword != null">
-				w_login_password = #{wLoginPassword,jdbcType=VARCHAR},
-			</if>
-			<if test="wLoginQuestion != null">
-				w_login_question = #{wLoginQuestion,jdbcType=VARCHAR},
-			</if>
-			<if test="wLoginAnswer != null">
-				w_login_answer = #{wLoginAnswer,jdbcType=VARCHAR},
-			</if>
-			<if test="wLoginStatus != null">
-				w_login_status = #{wLoginStatus,jdbcType=INTEGER},
-			</if>
-			<if test="wLoginCreatetime != null">
-				w_login_createtime =
-				#{wLoginCreatetime,jdbcType=TIMESTAMP},
-			</if>
-		</set>
-		where w_login_id = #{wLoginId,jdbcType=VARCHAR}
-	</update>
-	<update id="updateByPrimaryKey" parameterType="com.common.entity.UserLogin">
-		update
-		w_user_login
-		set w_user_id = #{wUserId,jdbcType=VARCHAR},
-		w_login_account = #{wLoginAccount,jdbcType=VARCHAR},
-		w_login_password =
-		#{wLoginPassword,jdbcType=VARCHAR},
-		w_login_question =
-		#{wLoginQuestion,jdbcType=VARCHAR},
-		w_login_answer =
-		#{wLoginAnswer,jdbcType=VARCHAR},
-		w_login_status =
-		#{wLoginStatus,jdbcType=INTEGER},
-		w_login_createtime =
-		#{wLoginCreatetime,jdbcType=TIMESTAMP}
-		where w_login_id =
-		#{wLoginId,jdbcType=VARCHAR}
-	</update>
+  <resultMap id="BaseResultMap" type="com.common.entity.UserLogin">
+    <id column="login_id" jdbcType="VARCHAR" property="loginId" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="login_account" jdbcType="VARCHAR" property="loginAccount" />
+    <result column="login_password" jdbcType="VARCHAR" property="loginPassword" />
+    <result column="login_question" jdbcType="VARCHAR" property="loginQuestion" />
+    <result column="login_answer" jdbcType="VARCHAR" property="loginAnswer" />
+    <result column="login_status" jdbcType="INTEGER" property="loginStatus" />
+    <result column="login_create_date" jdbcType="TIMESTAMP" property="loginCreateDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    login_id, user_id, login_account, login_password, login_question, login_answer, login_status, 
+    login_create_date
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user_login
+    where login_id = #{loginId,jdbcType=VARCHAR}
+  </select>
+  
+   <select id="selectByUserLogin" parameterType="com.common.entity.UserLogin" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user_login
+    where 1=1
+     <if test=" null != loginId and '' != loginId">
+            and login_id = #{loginId,jdbcType=VARCHAR}
+     </if>
+     <if test=" null != loginAccount and '' != loginAccount">
+            and login_account = #{loginAccount,jdbcType=VARCHAR}
+     </if>
+     <if test=" null != userId and '' != userId">
+            and user_id = #{userId,jdbcType=VARCHAR}
+     </if>
+     <if test=" null != loginStatus and '' != loginStatus">
+            and login_status = #{loginStatus,jdbcType=INTEGER}
+     </if>
+        <if test=" null != loginPassword and '' != loginPassword">
+            and login_password = #{loginPassword,jdbcType=VARCHAR}
+     </if>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from user_login
+    where login_id = #{loginId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.common.entity.UserLogin">
+    insert into user_login (login_id, user_id, login_account, 
+      login_password, login_question, login_answer, 
+      login_status, login_create_date)
+    values (#{loginId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{loginAccount,jdbcType=VARCHAR}, 
+      #{loginPassword,jdbcType=VARCHAR}, #{loginQuestion,jdbcType=VARCHAR}, #{loginAnswer,jdbcType=VARCHAR}, 
+      #{loginStatus,jdbcType=INTEGER}, #{loginCreateDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.common.entity.UserLogin">
+    insert into user_login
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="loginId != null">
+        login_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="loginAccount != null">
+        login_account,
+      </if>
+      <if test="loginPassword != null">
+        login_password,
+      </if>
+      <if test="loginQuestion != null">
+        login_question,
+      </if>
+      <if test="loginAnswer != null">
+        login_answer,
+      </if>
+      <if test="loginStatus != null">
+        login_status,
+      </if>
+      <if test="loginCreateDate != null">
+        login_create_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="loginId != null">
+        #{loginId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="loginAccount != null">
+        #{loginAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="loginPassword != null">
+        #{loginPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="loginQuestion != null">
+        #{loginQuestion,jdbcType=VARCHAR},
+      </if>
+      <if test="loginAnswer != null">
+        #{loginAnswer,jdbcType=VARCHAR},
+      </if>
+      <if test="loginStatus != null">
+        #{loginStatus,jdbcType=INTEGER},
+      </if>
+      <if test="loginCreateDate != null">
+        #{loginCreateDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.common.entity.UserLogin">
+    update user_login
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="loginAccount != null">
+        login_account = #{loginAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="loginPassword != null">
+        login_password = #{loginPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="loginQuestion != null">
+        login_question = #{loginQuestion,jdbcType=VARCHAR},
+      </if>
+      <if test="loginAnswer != null">
+        login_answer = #{loginAnswer,jdbcType=VARCHAR},
+      </if>
+      <if test="loginStatus != null">
+        login_status = #{loginStatus,jdbcType=INTEGER},
+      </if>
+      <if test="loginCreateDate != null">
+        login_create_date = #{loginCreateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where login_id = #{loginId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.common.entity.UserLogin">
+    update user_login
+    set user_id = #{userId,jdbcType=VARCHAR},
+      login_account = #{loginAccount,jdbcType=VARCHAR},
+      login_password = #{loginPassword,jdbcType=VARCHAR},
+      login_question = #{loginQuestion,jdbcType=VARCHAR},
+      login_answer = #{loginAnswer,jdbcType=VARCHAR},
+      login_status = #{loginStatus,jdbcType=INTEGER},
+      login_create_date = #{loginCreateDate,jdbcType=TIMESTAMP}
+    where login_id = #{loginId,jdbcType=VARCHAR}
+  </update>
 </mapper>

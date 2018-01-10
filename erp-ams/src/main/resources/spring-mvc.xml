@@ -18,7 +18,20 @@
 			expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>
 
-	<mvc:annotation-driven />
+	<mvc:annotation-driven>
+    <mvc:message-converters>
+        <bean class="org.springframework.http.converter.ResourceHttpMessageConverter" >
+        </bean>
+        <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" >
+         <property name="supportedMediaTypes">
+            <list>
+              <value>text/html;charset=UTF-8</value>
+              <value>application/json;charset=UTF-8</value>
+            </list> 
+         </property>
+        </bean>
+    </mvc:message-converters>
+</mvc:annotation-driven>
 
 	<!-- 内容协商管理器 -->
 	<!--1、首先检查路径扩展名（如my.pdf）；2、其次检查Parameter（如my?format=pdf）；3、检查Accept Header -->

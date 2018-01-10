@@ -5,17 +5,17 @@ import java.util.ArrayList;
 import com.common.entity.UserLogin;
 
 public interface UserLoginMapper {
-    int deleteByPrimaryKey(String wLoginId);
+	int deleteByPrimaryKey(String loginId);
 
-    int insert(UserLogin record);
+	int insert(UserLogin record);
 
-    int insertSelective(UserLogin record);
+	int insertSelective(UserLogin record);
 
-    UserLogin selectByPrimaryKey(String wLoginId);
-    
-    ArrayList<UserLogin> selectByUserLogin(UserLogin userlogin);
+	UserLogin selectByPrimaryKey(String loginId);
 
-    int updateByPrimaryKeySelective(UserLogin record);
+	int updateByPrimaryKeySelective(UserLogin record);
 
-    int updateByPrimaryKey(UserLogin record);
+	int updateByPrimaryKey(UserLogin record);
+
+	ArrayList<UserLogin> selectByUserLogin(UserLogin userlogin);
 }
