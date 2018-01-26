@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.dao.SysMenuMapper">
+  <resultMap id="BaseResultMap" type="com.common.entity.SysMenu">
+    <id column="menu_id" jdbcType="INTEGER" property="menuId" />
+    <result column="menu_father_id" jdbcType="INTEGER" property="menuFatherId" />
+    <result column="menu_name" jdbcType="VARCHAR" property="menuName" />
+    <result column="menu_type" jdbcType="INTEGER" property="menuType" />
+    <result column="menu_controller" jdbcType="VARCHAR" property="menuController" />
+    <result column="menu_icon" jdbcType="VARCHAR" property="menuIcon" />
+    <result column="menu_status" jdbcType="INTEGER" property="menuStatus" />
+    <result column="menu_url" jdbcType="VARCHAR" property="menuUrl" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.common.entity.SysMenu">
+    <result column="menu_desctiption" jdbcType="LONGVARCHAR" property="menuDesctiption" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    menu_id, menu_father_id, menu_name, menu_type, menu_controller, menu_icon, menu_status, 
+    menu_url
+  </sql>
+  <sql id="Blob_Column_List">
+    menu_desctiption
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from sys_menu
+    where menu_id = #{menuId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sys_menu
+    where menu_id = #{menuId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.common.entity.SysMenu">
+    insert into sys_menu (menu_id, menu_father_id, menu_name, 
+      menu_type, menu_controller, menu_icon, 
+      menu_status, menu_url, menu_desctiption
+      )
+    values (#{menuId,jdbcType=INTEGER}, #{menuFatherId,jdbcType=INTEGER}, #{menuName,jdbcType=VARCHAR}, 
+      #{menuType,jdbcType=INTEGER}, #{menuController,jdbcType=VARCHAR}, #{menuIcon,jdbcType=VARCHAR}, 
+      #{menuStatus,jdbcType=INTEGER}, #{menuUrl,jdbcType=VARCHAR}, #{menuDesctiption,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.common.entity.SysMenu">
+    insert into sys_menu
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="menuId != null">
+        menu_id,
+      </if>
+      <if test="menuFatherId != null">
+        menu_father_id,
+      </if>
+      <if test="menuName != null">
+        menu_name,
+      </if>
+      <if test="menuType != null">
+        menu_type,
+      </if>
+      <if test="menuController != null">
+        menu_controller,
+      </if>
+      <if test="menuIcon != null">
+        menu_icon,
+      </if>
+      <if test="menuStatus != null">
+        menu_status,
+      </if>
+      <if test="menuUrl != null">
+        menu_url,
+      </if>
+      <if test="menuDesctiption != null">
+        menu_desctiption,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="menuId != null">
+        #{menuId,jdbcType=INTEGER},
+      </if>
+      <if test="menuFatherId != null">
+        #{menuFatherId,jdbcType=INTEGER},
+      </if>
+      <if test="menuName != null">
+        #{menuName,jdbcType=VARCHAR},
+      </if>
+      <if test="menuType != null">
+        #{menuType,jdbcType=INTEGER},
+      </if>
+      <if test="menuController != null">
+        #{menuController,jdbcType=VARCHAR},
+      </if>
+      <if test="menuIcon != null">
+        #{menuIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="menuStatus != null">
+        #{menuStatus,jdbcType=INTEGER},
+      </if>
+      <if test="menuUrl != null">
+        #{menuUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="menuDesctiption != null">
+        #{menuDesctiption,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.common.entity.SysMenu">
+    update sys_menu
+    <set>
+      <if test="menuFatherId != null">
+        menu_father_id = #{menuFatherId,jdbcType=INTEGER},
+      </if>
+      <if test="menuName != null">
+        menu_name = #{menuName,jdbcType=VARCHAR},
+      </if>
+      <if test="menuType != null">
+        menu_type = #{menuType,jdbcType=INTEGER},
+      </if>
+      <if test="menuController != null">
+        menu_controller = #{menuController,jdbcType=VARCHAR},
+      </if>
+      <if test="menuIcon != null">
+        menu_icon = #{menuIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="menuStatus != null">
+        menu_status = #{menuStatus,jdbcType=INTEGER},
+      </if>
+      <if test="menuUrl != null">
+        menu_url = #{menuUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="menuDesctiption != null">
+        menu_desctiption = #{menuDesctiption,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where menu_id = #{menuId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.common.entity.SysMenu">
+    update sys_menu
+    set menu_father_id = #{menuFatherId,jdbcType=INTEGER},
+      menu_name = #{menuName,jdbcType=VARCHAR},
+      menu_type = #{menuType,jdbcType=INTEGER},
+      menu_controller = #{menuController,jdbcType=VARCHAR},
+      menu_icon = #{menuIcon,jdbcType=VARCHAR},
+      menu_status = #{menuStatus,jdbcType=INTEGER},
+      menu_url = #{menuUrl,jdbcType=VARCHAR},
+      menu_desctiption = #{menuDesctiption,jdbcType=LONGVARCHAR}
+    where menu_id = #{menuId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.common.entity.SysMenu">
+    update sys_menu
+    set menu_father_id = #{menuFatherId,jdbcType=INTEGER},
+      menu_name = #{menuName,jdbcType=VARCHAR},
+      menu_type = #{menuType,jdbcType=INTEGER},
+      menu_controller = #{menuController,jdbcType=VARCHAR},
+      menu_icon = #{menuIcon,jdbcType=VARCHAR},
+      menu_status = #{menuStatus,jdbcType=INTEGER},
+      menu_url = #{menuUrl,jdbcType=VARCHAR}
+    where menu_id = #{menuId,jdbcType=INTEGER}
+  </update>
+</mapper>

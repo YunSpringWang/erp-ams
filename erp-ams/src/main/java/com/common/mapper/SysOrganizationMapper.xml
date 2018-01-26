@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.dao.SysOrganizationMapper">
+  <resultMap id="BaseResultMap" type="com.common.entity.SysOrganization">
+    <id column="org_id" jdbcType="INTEGER" property="orgId" />
+    <result column="org_fater_id" jdbcType="INTEGER" property="orgFaterId" />
+    <result column="org_name" jdbcType="VARCHAR" property="orgName" />
+    <result column="org_create_date" jdbcType="TIMESTAMP" property="orgCreateDate" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.common.entity.SysOrganization">
+    <result column="org_description" jdbcType="LONGVARCHAR" property="orgDescription" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    org_id, org_fater_id, org_name, org_create_date
+  </sql>
+  <sql id="Blob_Column_List">
+    org_description
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from sys_organization
+    where org_id = #{orgId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sys_organization
+    where org_id = #{orgId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.common.entity.SysOrganization">
+    insert into sys_organization (org_id, org_fater_id, org_name, 
+      org_create_date, org_description)
+    values (#{orgId,jdbcType=INTEGER}, #{orgFaterId,jdbcType=INTEGER}, #{orgName,jdbcType=VARCHAR}, 
+      #{orgCreateDate,jdbcType=TIMESTAMP}, #{orgDescription,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.common.entity.SysOrganization">
+    insert into sys_organization
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orgId != null">
+        org_id,
+      </if>
+      <if test="orgFaterId != null">
+        org_fater_id,
+      </if>
+      <if test="orgName != null">
+        org_name,
+      </if>
+      <if test="orgCreateDate != null">
+        org_create_date,
+      </if>
+      <if test="orgDescription != null">
+        org_description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orgId != null">
+        #{orgId,jdbcType=INTEGER},
+      </if>
+      <if test="orgFaterId != null">
+        #{orgFaterId,jdbcType=INTEGER},
+      </if>
+      <if test="orgName != null">
+        #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgCreateDate != null">
+        #{orgCreateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orgDescription != null">
+        #{orgDescription,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.common.entity.SysOrganization">
+    update sys_organization
+    <set>
+      <if test="orgFaterId != null">
+        org_fater_id = #{orgFaterId,jdbcType=INTEGER},
+      </if>
+      <if test="orgName != null">
+        org_name = #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgCreateDate != null">
+        org_create_date = #{orgCreateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orgDescription != null">
+        org_description = #{orgDescription,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where org_id = #{orgId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.common.entity.SysOrganization">
+    update sys_organization
+    set org_fater_id = #{orgFaterId,jdbcType=INTEGER},
+      org_name = #{orgName,jdbcType=VARCHAR},
+      org_create_date = #{orgCreateDate,jdbcType=TIMESTAMP},
+      org_description = #{orgDescription,jdbcType=LONGVARCHAR}
+    where org_id = #{orgId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.common.entity.SysOrganization">
+    update sys_organization
+    set org_fater_id = #{orgFaterId,jdbcType=INTEGER},
+      org_name = #{orgName,jdbcType=VARCHAR},
+      org_create_date = #{orgCreateDate,jdbcType=TIMESTAMP}
+    where org_id = #{orgId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.dao.SysAuthorityMapper">
+  <resultMap id="BaseResultMap" type="com.common.entity.SysAuthority">
+    <id column="sys_authority_id" jdbcType="INTEGER" property="sysAuthorityId" />
+    <result column="sys_authority_father_id" jdbcType="INTEGER" property="sysAuthorityFatherId" />
+    <result column="sys_authority_name" jdbcType="VARCHAR" property="sysAuthorityName" />
+    <result column="sys_authority_create_date" jdbcType="TIMESTAMP" property="sysAuthorityCreateDate" />
+    <result column="sys_authority_type" jdbcType="VARCHAR" property="sysAuthorityType" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.common.entity.SysAuthority">
+    <result column="sys_authority_description" jdbcType="LONGVARCHAR" property="sysAuthorityDescription" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    sys_authority_id, sys_authority_father_id, sys_authority_name, sys_authority_create_date, 
+    sys_authority_type
+  </sql>
+  <sql id="Blob_Column_List">
+    sys_authority_description
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from sys_authority
+    where sys_authority_id = #{sysAuthorityId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sys_authority
+    where sys_authority_id = #{sysAuthorityId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.common.entity.SysAuthority">
+    insert into sys_authority (sys_authority_id, sys_authority_father_id, 
+      sys_authority_name, sys_authority_create_date, 
+      sys_authority_type, sys_authority_description
+      )
+    values (#{sysAuthorityId,jdbcType=INTEGER}, #{sysAuthorityFatherId,jdbcType=INTEGER}, 
+      #{sysAuthorityName,jdbcType=VARCHAR}, #{sysAuthorityCreateDate,jdbcType=TIMESTAMP}, 
+      #{sysAuthorityType,jdbcType=VARCHAR}, #{sysAuthorityDescription,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.common.entity.SysAuthority">
+    insert into sys_authority
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sysAuthorityId != null">
+        sys_authority_id,
+      </if>
+      <if test="sysAuthorityFatherId != null">
+        sys_authority_father_id,
+      </if>
+      <if test="sysAuthorityName != null">
+        sys_authority_name,
+      </if>
+      <if test="sysAuthorityCreateDate != null">
+        sys_authority_create_date,
+      </if>
+      <if test="sysAuthorityType != null">
+        sys_authority_type,
+      </if>
+      <if test="sysAuthorityDescription != null">
+        sys_authority_description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sysAuthorityId != null">
+        #{sysAuthorityId,jdbcType=INTEGER},
+      </if>
+      <if test="sysAuthorityFatherId != null">
+        #{sysAuthorityFatherId,jdbcType=INTEGER},
+      </if>
+      <if test="sysAuthorityName != null">
+        #{sysAuthorityName,jdbcType=VARCHAR},
+      </if>
+      <if test="sysAuthorityCreateDate != null">
+        #{sysAuthorityCreateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sysAuthorityType != null">
+        #{sysAuthorityType,jdbcType=VARCHAR},
+      </if>
+      <if test="sysAuthorityDescription != null">
+        #{sysAuthorityDescription,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.common.entity.SysAuthority">
+    update sys_authority
+    <set>
+      <if test="sysAuthorityFatherId != null">
+        sys_authority_father_id = #{sysAuthorityFatherId,jdbcType=INTEGER},
+      </if>
+      <if test="sysAuthorityName != null">
+        sys_authority_name = #{sysAuthorityName,jdbcType=VARCHAR},
+      </if>
+      <if test="sysAuthorityCreateDate != null">
+        sys_authority_create_date = #{sysAuthorityCreateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sysAuthorityType != null">
+        sys_authority_type = #{sysAuthorityType,jdbcType=VARCHAR},
+      </if>
+      <if test="sysAuthorityDescription != null">
+        sys_authority_description = #{sysAuthorityDescription,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where sys_authority_id = #{sysAuthorityId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.common.entity.SysAuthority">
+    update sys_authority
+    set sys_authority_father_id = #{sysAuthorityFatherId,jdbcType=INTEGER},
+      sys_authority_name = #{sysAuthorityName,jdbcType=VARCHAR},
+      sys_authority_create_date = #{sysAuthorityCreateDate,jdbcType=TIMESTAMP},
+      sys_authority_type = #{sysAuthorityType,jdbcType=VARCHAR},
+      sys_authority_description = #{sysAuthorityDescription,jdbcType=LONGVARCHAR}
+    where sys_authority_id = #{sysAuthorityId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.common.entity.SysAuthority">
+    update sys_authority
+    set sys_authority_father_id = #{sysAuthorityFatherId,jdbcType=INTEGER},
+      sys_authority_name = #{sysAuthorityName,jdbcType=VARCHAR},
+      sys_authority_create_date = #{sysAuthorityCreateDate,jdbcType=TIMESTAMP},
+      sys_authority_type = #{sysAuthorityType,jdbcType=VARCHAR}
+    where sys_authority_id = #{sysAuthorityId,jdbcType=INTEGER}
+  </update>
+</mapper>

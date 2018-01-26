@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.dao.SysLoginLogsMapper">
+  <resultMap id="BaseResultMap" type="com.common.entity.SysLoginLogs">
+    <id column="sys_login_logs_id" jdbcType="VARCHAR" property="sysLoginLogsId" />
+    <result column="login_id" jdbcType="VARCHAR" property="loginId" />
+    <result column="sys_login_logs_ip" jdbcType="VARCHAR" property="sysLoginLogsIp" />
+    <result column="sys_login_logs_mac" jdbcType="VARCHAR" property="sysLoginLogsMac" />
+    <result column="sys_login_logs_systype" jdbcType="INTEGER" property="sysLoginLogsSystype" />
+    <result column="sys_login_logs_create_date" jdbcType="TIMESTAMP" property="sysLoginLogsCreateDate" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.common.entity.SysLoginLogs">
+    <result column="sys_login_logs_description" jdbcType="LONGVARCHAR" property="sysLoginLogsDescription" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    sys_login_logs_id, login_id, sys_login_logs_ip, sys_login_logs_mac, sys_login_logs_systype, 
+    sys_login_logs_create_date
+  </sql>
+  <sql id="Blob_Column_List">
+    sys_login_logs_description
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from sys_login_logs
+    where sys_login_logs_id = #{sysLoginLogsId,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="getListSysLoginLogs" parameterType="com.common.entity.SysLoginLogs" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from sys_login_logs
+    where 1=1
+    <if test=" null != sysLoginLogsId and '' != sysLoginLogsId">
+            and sys_login_logs_id = #{sysLoginLogsId,jdbcType=VARCHAR}
+     </if>
+     <if test=" null != loginId and '' != loginId">
+            and login_id = #{loginId,jdbcType=VARCHAR}
+     </if>
+     <if test=" null != sysLoginLogsSystype and '' != sysLoginLogsSystype">
+            and sys_login_logs_systype = #{sysLoginLogsSystype,jdbcType=INTEGER}
+     </if>
+     <if test=" null != sysLoginLogsCreateDate and '' != sysLoginLogsCreateDate">
+            and sys_login_logs_create_date = #{sysLoginLogsCreateDate,jdbcType=TIMESTAMP}
+     </if>
+        <if test=" null != sysLoginLogsIp and '' != sysLoginLogsIp">
+            and sys_login_logs_ip = #{sysLoginLogsIp,jdbcType=VARCHAR}
+     </if>
+   </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from sys_login_logs
+    where sys_login_logs_id = #{sysLoginLogsId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.common.entity.SysLoginLogs">
+    insert into sys_login_logs (sys_login_logs_id, login_id, sys_login_logs_ip, 
+      sys_login_logs_mac, sys_login_logs_systype, sys_login_logs_create_date, 
+      sys_login_logs_description)
+    values (#{sysLoginLogsId,jdbcType=VARCHAR}, #{loginId,jdbcType=VARCHAR}, #{sysLoginLogsIp,jdbcType=VARCHAR}, 
+      #{sysLoginLogsMac,jdbcType=VARCHAR}, #{sysLoginLogsSystype,jdbcType=INTEGER}, #{sysLoginLogsCreateDate,jdbcType=TIMESTAMP}, 
+      #{sysLoginLogsDescription,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.common.entity.SysLoginLogs">
+    insert into sys_login_logs
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sysLoginLogsId != null">
+        sys_login_logs_id,
+      </if>
+      <if test="loginId != null">
+        login_id,
+      </if>
+      <if test="sysLoginLogsIp != null">
+        sys_login_logs_ip,
+      </if>
+      <if test="sysLoginLogsMac != null">
+        sys_login_logs_mac,
+      </if>
+      <if test="sysLoginLogsSystype != null">
+        sys_login_logs_systype,
+      </if>
+      <if test="sysLoginLogsCreateDate != null">
+        sys_login_logs_create_date,
+      </if>
+      <if test="sysLoginLogsDescription != null">
+        sys_login_logs_description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sysLoginLogsId != null">
+        #{sysLoginLogsId,jdbcType=VARCHAR},
+      </if>
+      <if test="loginId != null">
+        #{loginId,jdbcType=VARCHAR},
+      </if>
+      <if test="sysLoginLogsIp != null">
+        #{sysLoginLogsIp,jdbcType=VARCHAR},
+      </if>
+      <if test="sysLoginLogsMac != null">
+        #{sysLoginLogsMac,jdbcType=VARCHAR},
+      </if>
+      <if test="sysLoginLogsSystype != null">
+        #{sysLoginLogsSystype,jdbcType=INTEGER},
+      </if>
+      <if test="sysLoginLogsCreateDate != null">
+        #{sysLoginLogsCreateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sysLoginLogsDescription != null">
+        #{sysLoginLogsDescription,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.common.entity.SysLoginLogs">
+    update sys_login_logs
+    <set>
+      <if test="loginId != null">
+        login_id = #{loginId,jdbcType=VARCHAR},
+      </if>
+      <if test="sysLoginLogsIp != null">
+        sys_login_logs_ip = #{sysLoginLogsIp,jdbcType=VARCHAR},
+      </if>
+      <if test="sysLoginLogsMac != null">
+        sys_login_logs_mac = #{sysLoginLogsMac,jdbcType=VARCHAR},
+      </if>
+      <if test="sysLoginLogsSystype != null">
+        sys_login_logs_systype = #{sysLoginLogsSystype,jdbcType=INTEGER},
+      </if>
+      <if test="sysLoginLogsCreateDate != null">
+        sys_login_logs_create_date = #{sysLoginLogsCreateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sysLoginLogsDescription != null">
+        sys_login_logs_description = #{sysLoginLogsDescription,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where sys_login_logs_id = #{sysLoginLogsId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.common.entity.SysLoginLogs">
+    update sys_login_logs
+    set login_id = #{loginId,jdbcType=VARCHAR},
+      sys_login_logs_ip = #{sysLoginLogsIp,jdbcType=VARCHAR},
+      sys_login_logs_mac = #{sysLoginLogsMac,jdbcType=VARCHAR},
+      sys_login_logs_systype = #{sysLoginLogsSystype,jdbcType=INTEGER},
+      sys_login_logs_create_date = #{sysLoginLogsCreateDate,jdbcType=TIMESTAMP},
+      sys_login_logs_description = #{sysLoginLogsDescription,jdbcType=LONGVARCHAR}
+    where sys_login_logs_id = #{sysLoginLogsId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.common.entity.SysLoginLogs">
+    update sys_login_logs
+    set login_id = #{loginId,jdbcType=VARCHAR},
+      sys_login_logs_ip = #{sysLoginLogsIp,jdbcType=VARCHAR},
+      sys_login_logs_mac = #{sysLoginLogsMac,jdbcType=VARCHAR},
+      sys_login_logs_systype = #{sysLoginLogsSystype,jdbcType=INTEGER},
+      sys_login_logs_create_date = #{sysLoginLogsCreateDate,jdbcType=TIMESTAMP}
+    where sys_login_logs_id = #{sysLoginLogsId,jdbcType=VARCHAR}
+  </update>
+</mapper>

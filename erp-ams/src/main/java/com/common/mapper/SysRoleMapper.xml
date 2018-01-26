@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.dao.SysRoleMapper">
+  <resultMap id="BaseResultMap" type="com.common.entity.SysRole">
+    <id column="role_id" jdbcType="INTEGER" property="roleId" />
+    <result column="role_father_id" jdbcType="INTEGER" property="roleFatherId" />
+    <result column="role_name" jdbcType="VARCHAR" property="roleName" />
+    <result column="role_create_date" jdbcType="TIMESTAMP" property="roleCreateDate" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.common.entity.SysRole">
+    <result column="role_description" jdbcType="LONGVARCHAR" property="roleDescription" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    role_id, role_father_id, role_name, role_create_date
+  </sql>
+  <sql id="Blob_Column_List">
+    role_description
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from sys_role
+    where role_id = #{roleId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sys_role
+    where role_id = #{roleId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.common.entity.SysRole">
+    insert into sys_role (role_id, role_father_id, role_name, 
+      role_create_date, role_description)
+    values (#{roleId,jdbcType=INTEGER}, #{roleFatherId,jdbcType=INTEGER}, #{roleName,jdbcType=VARCHAR}, 
+      #{roleCreateDate,jdbcType=TIMESTAMP}, #{roleDescription,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.common.entity.SysRole">
+    insert into sys_role
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="roleId != null">
+        role_id,
+      </if>
+      <if test="roleFatherId != null">
+        role_father_id,
+      </if>
+      <if test="roleName != null">
+        role_name,
+      </if>
+      <if test="roleCreateDate != null">
+        role_create_date,
+      </if>
+      <if test="roleDescription != null">
+        role_description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="roleId != null">
+        #{roleId,jdbcType=INTEGER},
+      </if>
+      <if test="roleFatherId != null">
+        #{roleFatherId,jdbcType=INTEGER},
+      </if>
+      <if test="roleName != null">
+        #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="roleCreateDate != null">
+        #{roleCreateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="roleDescription != null">
+        #{roleDescription,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.common.entity.SysRole">
+    update sys_role
+    <set>
+      <if test="roleFatherId != null">
+        role_father_id = #{roleFatherId,jdbcType=INTEGER},
+      </if>
+      <if test="roleName != null">
+        role_name = #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="roleCreateDate != null">
+        role_create_date = #{roleCreateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="roleDescription != null">
+        role_description = #{roleDescription,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where role_id = #{roleId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.common.entity.SysRole">
+    update sys_role
+    set role_father_id = #{roleFatherId,jdbcType=INTEGER},
+      role_name = #{roleName,jdbcType=VARCHAR},
+      role_create_date = #{roleCreateDate,jdbcType=TIMESTAMP},
+      role_description = #{roleDescription,jdbcType=LONGVARCHAR}
+    where role_id = #{roleId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.common.entity.SysRole">
+    update sys_role
+    set role_father_id = #{roleFatherId,jdbcType=INTEGER},
+      role_name = #{roleName,jdbcType=VARCHAR},
+      role_create_date = #{roleCreateDate,jdbcType=TIMESTAMP}
+    where role_id = #{roleId,jdbcType=INTEGER}
+  </update>
+</mapper>

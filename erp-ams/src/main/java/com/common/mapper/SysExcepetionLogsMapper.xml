@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.common.dao.SysExcepetionLogsMapper">
+  <resultMap id="BaseResultMap" type="com.common.entity.SysExcepetionLogs">
+    <id column="excepetion_id" jdbcType="VARCHAR" property="excepetionId" />
+    <result column="login_id" jdbcType="VARCHAR" property="loginId" />
+    <result column="excepetion_class" jdbcType="VARCHAR" property="excepetionClass" />
+    <result column="excepetion_method" jdbcType="VARCHAR" property="excepetionMethod" />
+    <result column="excepetion_type" jdbcType="INTEGER" property="excepetionType" />
+    <result column="excepetion_time" jdbcType="TIMESTAMP" property="excepetionTime" />
+    <result column="excepetion_status" jdbcType="INTEGER" property="excepetionStatus" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.common.entity.SysExcepetionLogs">
+    <result column="excepetion_content" jdbcType="LONGVARCHAR" property="excepetionContent" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    excepetion_id, login_id, excepetion_class, excepetion_method, excepetion_type, excepetion_time, 
+    excepetion_status
+  </sql>
+  <sql id="Blob_Column_List">
+    excepetion_content
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from sys_excepetion_logs
+    where excepetion_id = #{excepetionId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from sys_excepetion_logs
+    where excepetion_id = #{excepetionId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.common.entity.SysExcepetionLogs">
+    insert into sys_excepetion_logs (excepetion_id, login_id, excepetion_class, 
+      excepetion_method, excepetion_type, excepetion_time, 
+      excepetion_status, excepetion_content
+      )
+    values (#{excepetionId,jdbcType=VARCHAR}, #{loginId,jdbcType=VARCHAR}, #{excepetionClass,jdbcType=VARCHAR}, 
+      #{excepetionMethod,jdbcType=VARCHAR}, #{excepetionType,jdbcType=INTEGER}, #{excepetionTime,jdbcType=TIMESTAMP}, 
+      #{excepetionStatus,jdbcType=INTEGER}, #{excepetionContent,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.common.entity.SysExcepetionLogs">
+    insert into sys_excepetion_logs
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="excepetionId != null">
+        excepetion_id,
+      </if>
+      <if test="loginId != null">
+        login_id,
+      </if>
+      <if test="excepetionClass != null">
+        excepetion_class,
+      </if>
+      <if test="excepetionMethod != null">
+        excepetion_method,
+      </if>
+      <if test="excepetionType != null">
+        excepetion_type,
+      </if>
+      <if test="excepetionTime != null">
+        excepetion_time,
+      </if>
+      <if test="excepetionStatus != null">
+        excepetion_status,
+      </if>
+      <if test="excepetionContent != null">
+        excepetion_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="excepetionId != null">
+        #{excepetionId,jdbcType=VARCHAR},
+      </if>
+      <if test="loginId != null">
+        #{loginId,jdbcType=VARCHAR},
+      </if>
+      <if test="excepetionClass != null">
+        #{excepetionClass,jdbcType=VARCHAR},
+      </if>
+      <if test="excepetionMethod != null">
+        #{excepetionMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="excepetionType != null">
+        #{excepetionType,jdbcType=INTEGER},
+      </if>
+      <if test="excepetionTime != null">
+        #{excepetionTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="excepetionStatus != null">
+        #{excepetionStatus,jdbcType=INTEGER},
+      </if>
+      <if test="excepetionContent != null">
+        #{excepetionContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.common.entity.SysExcepetionLogs">
+    update sys_excepetion_logs
+    <set>
+      <if test="loginId != null">
+        login_id = #{loginId,jdbcType=VARCHAR},
+      </if>
+      <if test="excepetionClass != null">
+        excepetion_class = #{excepetionClass,jdbcType=VARCHAR},
+      </if>
+      <if test="excepetionMethod != null">
+        excepetion_method = #{excepetionMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="excepetionType != null">
+        excepetion_type = #{excepetionType,jdbcType=INTEGER},
+      </if>
+      <if test="excepetionTime != null">
+        excepetion_time = #{excepetionTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="excepetionStatus != null">
+        excepetion_status = #{excepetionStatus,jdbcType=INTEGER},
+      </if>
+      <if test="excepetionContent != null">
+        excepetion_content = #{excepetionContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where excepetion_id = #{excepetionId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.common.entity.SysExcepetionLogs">
+    update sys_excepetion_logs
+    set login_id = #{loginId,jdbcType=VARCHAR},
+      excepetion_class = #{excepetionClass,jdbcType=VARCHAR},
+      excepetion_method = #{excepetionMethod,jdbcType=VARCHAR},
+      excepetion_type = #{excepetionType,jdbcType=INTEGER},
+      excepetion_time = #{excepetionTime,jdbcType=TIMESTAMP},
+      excepetion_status = #{excepetionStatus,jdbcType=INTEGER},
+      excepetion_content = #{excepetionContent,jdbcType=LONGVARCHAR}
+    where excepetion_id = #{excepetionId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.common.entity.SysExcepetionLogs">
+    update sys_excepetion_logs
+    set login_id = #{loginId,jdbcType=VARCHAR},
+      excepetion_class = #{excepetionClass,jdbcType=VARCHAR},
+      excepetion_method = #{excepetionMethod,jdbcType=VARCHAR},
+      excepetion_type = #{excepetionType,jdbcType=INTEGER},
+      excepetion_time = #{excepetionTime,jdbcType=TIMESTAMP},
+      excepetion_status = #{excepetionStatus,jdbcType=INTEGER}
+    where excepetion_id = #{excepetionId,jdbcType=VARCHAR}
+  </update>
+</mapper>
